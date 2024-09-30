@@ -1,0 +1,25 @@
+name: setup
+description: "Setup - Cache dependencies ⚡ - Install dependencies 🔧"
+runs:
+  using: "composite"
+  steps:
+    - name: Install pnpm
+      shell: bash
+      run: npm install -g pnpm
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        cd ${{ inputs.working-directory }}
+        pnpm install
+
+    - name: Build
+      shell: bash
+      run: |
+        cd ${{ inputs.working-directory }}
+        pnpm build
+
+inputs:
+  working-directory:
+    description: "Working directory"
+    default: "./app"
